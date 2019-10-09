@@ -46,8 +46,10 @@ public class OrderServiceImpl implements OrderService {
             orderDetail.setOrderMaster(orderMaster);
             String goodsId = orderDetail.getGoodsId();
             Optional<Goods> goodsOptional = goodsRepository.findById(goodsId);
-            BigDecimal perPrice = goodsOptional.get().getGoodsPrice();
-            sum = sum.add(perPrice.multiply(orderDetail.getGoodsNum()));
+            if(goodsOptional.isPresent()){
+                BigDecimal perPrice = goodsOptional.get().getGoodsPrice();
+                sum = sum.add(perPrice.multiply(orderDetail.getGoodsNum()));
+            }
             orderDetailRepository.save(orderDetail);
         }
         orderMaster.setOrderPrice(sum);
@@ -72,7 +74,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Page<OrderMaster> getOrderList(Pageable pageable){
-        Page<OrderMaster> page = orderMasterRepository.findAll(pageable);
-        return page;
+        return orderMasterRepository.findAll(pageable);
     }
 }
