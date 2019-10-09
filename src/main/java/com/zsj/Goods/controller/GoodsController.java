@@ -1,7 +1,7 @@
-package com.zsj.product.controller;
+package com.zsj.Goods.controller;
 
-import com.zsj.product.entity.Goods;
-import com.zsj.product.service.GoodsService;
+import com.zsj.Goods.entity.Goods;
+import com.zsj.Goods.service.GoodsService;
 import com.zsj.utils.Keyutils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

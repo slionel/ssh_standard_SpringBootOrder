@@ -30,11 +30,6 @@ public class OrderForm {
     private String customerId;
 
     /**
-     * 订单总价
-     */
-    private BigDecimal orderPrice;
-
-    /**
      * 订单完成时间
      */
 

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 /**
  * @author zsj
@@ -18,7 +19,7 @@ public class OrderDetail {
     @Column(length = 50)
     private String id;
     private String goodsId;
-    private String goodsNum;
+    private BigDecimal goodsNum;
 
     @JsonIgnore
     @ManyToOne

@@ -1,7 +1,4 @@
-package com.zsj.product.entity;
-
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
+package com.zsj.Goods.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

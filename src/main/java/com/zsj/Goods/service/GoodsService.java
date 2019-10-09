@@ -1,12 +1,13 @@
-package com.zsj.product.service;
+package com.zsj.Goods.service;
 
-import com.zsj.product.dao.GoodsRepository;
-import com.zsj.product.entity.Goods;
+import com.zsj.Goods.dao.GoodsRepository;
+import com.zsj.Goods.entity.Goods;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Optional;
 
 /**
  * @author zsj
@@ -32,5 +33,9 @@ public class GoodsService {
 
     public Page<Goods> getGoodsList(Pageable pageable){
         return goodsRepository.findAll(pageable);
+    }
+
+    public Optional<Goods> getGoodsById(String id){
+        return goodsRepository.findById(id);
     }
 }

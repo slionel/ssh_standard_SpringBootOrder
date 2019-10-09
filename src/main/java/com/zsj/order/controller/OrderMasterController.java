@@ -59,10 +59,14 @@ public class OrderMasterController {
         return ResultVoUtil.success(map);
     }
 
+    @ApiOperation(value = "更新订单，OrderMaster", notes = "form表单传值，地址传值")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "orderForm", value = "订单表单实体", required = true, dataType = "OrderForm"),
+            @ApiImplicitParam(name = "orderId", value = "订单主表id", required = true, dataType = "String")
+    })
     @PutMapping("updateOrder/{orderId}")
     @ResponseBody
     public ResultVo<Map<String,String>> updateOrder(OrderForm orderForm, @PathVariable(name = "orderId") String orderId){
-        Map<String, OrderMaster> map = new HashMap<>(1);
         OrderDTO orderDTO = OrderFormToOrderDTOConverter.convert(orderForm);
         orderService.updateOrder(orderDTO, orderId);
         return ResultVoUtil.success();
@@ -86,8 +90,8 @@ public class OrderMasterController {
     )
     @GetMapping("getOrderList/{pageNo}/{pageSize}")
     @ResponseBody
-    public Page<OrderMaster> getOrderList(@PathVariable(name = "pageNo") int pageNo, @PathVariable(name = "pageSize") int pageSize){
+    public ResultVo<Page<OrderMaster>> getOrderList(@PathVariable(name = "pageNo") int pageNo, @PathVariable(name = "pageSize") int pageSize){
         Pageable pageable = PageRequest.of(pageNo,pageSize);
-        return orderService.getOrderList(pageable);
+        return ResultVoUtil.success(orderService.getOrderList(pageable));
     }
 }

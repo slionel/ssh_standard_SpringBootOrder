@@ -1,6 +1,6 @@
-package com.zsj.product.dao;
+package com.zsj.Goods.dao;
 
-import com.zsj.product.entity.Goods;
+import com.zsj.Goods.entity.Goods;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

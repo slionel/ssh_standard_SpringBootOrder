@@ -24,7 +24,6 @@ public class OrderFormToOrderDTOConverter {
         orderDTO.setOrderName(orderForm.getOrderName());
         orderDTO.setCreateTime(orderForm.getCreateTime());
         orderDTO.setCustomerId(orderForm.getCustomerId());
-        orderDTO.setOrderPrice(orderForm.getOrderPrice());
         orderDTO.setCompleteTime(orderForm.getCompleteTime());
         orderDTO.setStatus(orderForm.getStatus());
 
