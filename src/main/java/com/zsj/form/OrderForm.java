@@ -18,12 +18,6 @@ public class OrderForm {
     private String orderName;
 
     /**
-     * 订单创建时间
-     */
-    @NotEmpty(message = "订单创建时间不能为空")
-    private String createTime;
-
-    /**
      * 用户id
      */
     @NotEmpty(message = "用户id不能为空")

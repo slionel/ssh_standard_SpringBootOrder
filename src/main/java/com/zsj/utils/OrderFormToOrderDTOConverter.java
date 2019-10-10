@@ -22,7 +22,6 @@ public class OrderFormToOrderDTOConverter {
         Gson gson = new Gson();
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setOrderName(orderForm.getOrderName());
-        orderDTO.setCreateTime(orderForm.getCreateTime());
         orderDTO.setCustomerId(orderForm.getCustomerId());
         orderDTO.setCompleteTime(orderForm.getCompleteTime());
         orderDTO.setStatus(orderForm.getStatus());

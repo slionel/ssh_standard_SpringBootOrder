@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 
 /**
  * @author zsj
@@ -30,4 +32,12 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, String
     @Modifying
     @Query(value = "DELETE FROM order_detail WHERE id=?1 AND order_id=?2", nativeQuery = true)
     void deleteOrderDetail(String orderDetailId, String orderMasterId);
+
+    /**
+     * 根据订单主表id查询
+     * @param orderMasterId 主表id
+     * @return OrderDetail的List
+     */
+    @Query(value = "SELECT * FROM order_detail WHERE order_id=?1", nativeQuery = true)
+    List<OrderDetail> findByOrderMaterId(String orderMasterId);
 }

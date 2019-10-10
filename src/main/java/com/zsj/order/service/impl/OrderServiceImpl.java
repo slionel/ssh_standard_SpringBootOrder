@@ -17,6 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -40,6 +43,7 @@ public class OrderServiceImpl implements OrderService {
         OrderMaster orderMaster = new OrderMaster();
         BeanUtils.copyProperties(orderDTO, orderMaster);
         orderMaster.setOrderId(orderMasterId);
+        orderMaster.setCreateTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         orderMasterRepository.save(orderMaster);
         for (OrderDetail orderDetail : orderDTO.getOrderDetailList()){
             orderDetail.setId(Keyutils.genUniqueKey());
@@ -81,12 +85,32 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void updateOrderDetail(String orderDetailId, String orderMasterId, BigDecimal goodsNum) {
+        BigDecimal sum = new BigDecimal(0);
         orderDetailRepository.updateOrderDetail(orderDetailId, orderMasterId, goodsNum.intValue());
+        List<OrderDetail> orderDetails = orderDetailRepository.findByOrderMaterId(orderMasterId);
+        for(OrderDetail orderDetail:orderDetails){
+            Optional<Goods> goodsOptional = goodsRepository.findById(orderDetail.getGoodsId());
+            if(goodsOptional.isPresent()){
+                BigDecimal perPrice = goodsOptional.get().getGoodsPrice();
+                sum = sum.add(perPrice.multiply(orderDetail.getGoodsNum()));
+            }
+        }
+        orderMasterRepository.updateOrderPrice(orderMasterId, sum.toString());
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteOrderDetail(String orderDetailId, String orderMasterId) {
+        BigDecimal sum = new BigDecimal(0);
         orderDetailRepository.deleteOrderDetail(orderDetailId,orderMasterId);
+        List<OrderDetail> orderDetails = orderDetailRepository.findByOrderMaterId(orderMasterId);
+        for(OrderDetail orderDetail:orderDetails){
+            Optional<Goods> goodsOptional = goodsRepository.findById(orderDetail.getGoodsId());
+            if(goodsOptional.isPresent()){
+                BigDecimal perPrice = goodsOptional.get().getGoodsPrice();
+                sum = sum.add(perPrice.multiply(orderDetail.getGoodsNum()));
+            }
+        }
+        orderMasterRepository.updateOrderPrice(orderMasterId, sum.toString());
     }
 }

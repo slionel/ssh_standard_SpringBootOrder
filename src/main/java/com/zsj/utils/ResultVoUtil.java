@@ -10,6 +10,7 @@ public class ResultVoUtil {
     public static ResultVo success(Object object){
         ResultVo resultVo = new ResultVo();
         resultVo.setBody(object);
+        resultVo.setSuccess(true);
         resultVo.setErrorCode(-1);
         resultVo.setMsg("成功");
         return resultVo;
