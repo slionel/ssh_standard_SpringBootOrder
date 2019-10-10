@@ -76,4 +76,13 @@ public class OrderServiceImpl implements OrderService {
     public Page<OrderMaster> getOrderList(Pageable pageable){
         return orderMasterRepository.findAll(pageable);
     }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateOrderDetail(String orderDetailId, String orderMasterId, BigDecimal goodsNum) {
+        System.out.println(orderDetailId);
+        System.out.println(orderMasterId);
+        System.out.println(goodsNum.intValue());
+        orderDetailRepository.updateOrderDetail(orderDetailId, orderMasterId, goodsNum.intValue());
+    }
 }
