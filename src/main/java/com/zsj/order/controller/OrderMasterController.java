@@ -29,7 +29,7 @@ import java.util.*;
  * @author zsj
  * @date 2019.9.23
  */
-@Api(value = "订单Controller")
+@Api(value = "订单主表Controller")
 @Slf4j
 @Controller
 @RequestMapping("omc")

@@ -73,6 +73,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Page<OrderMaster> getOrderList(Pageable pageable){
         return orderMasterRepository.findAll(pageable);
     }
@@ -80,9 +81,12 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void updateOrderDetail(String orderDetailId, String orderMasterId, BigDecimal goodsNum) {
-        System.out.println(orderDetailId);
-        System.out.println(orderMasterId);
-        System.out.println(goodsNum.intValue());
         orderDetailRepository.updateOrderDetail(orderDetailId, orderMasterId, goodsNum.intValue());
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteOrderDetail(String orderDetailId, String orderMasterId) {
+        orderDetailRepository.deleteOrderDetail(orderDetailId,orderMasterId);
     }
 }

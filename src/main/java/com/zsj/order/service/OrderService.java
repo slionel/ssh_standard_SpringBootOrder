@@ -50,4 +50,11 @@ public interface OrderService {
      * @return
      */
     void updateOrderDetail(String orderDetailId, String orderMasterId, BigDecimal goodsNum);
+
+    /**
+     * 删除订单详情表中的数据
+     * @param orderDetailId 订单详情表id
+     * @param orderMasterId 订单主表id
+     */
+    void deleteOrderDetail(String orderDetailId, String orderMasterId);
 }

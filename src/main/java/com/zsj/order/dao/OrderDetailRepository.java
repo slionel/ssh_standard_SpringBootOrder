@@ -21,4 +21,13 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, String
     @Modifying
     @Query(value = "UPDATE order_detail SET goods_num=?3 WHERE id=?1 AND order_id=?2", nativeQuery = true)
     void updateOrderDetail(String orderDetailId, String orderMasterId, int goodsNum);
+
+    /**
+     * 删除订单详情表中的数据
+     * @param orderDetailId 订单详情表id
+     * @param orderMasterId 订单主表id
+     */
+    @Modifying
+    @Query(value = "DELETE FROM order_detail WHERE id=?1 AND order_id=?2", nativeQuery = true)
+    void deleteOrderDetail(String orderDetailId, String orderMasterId);
 }
